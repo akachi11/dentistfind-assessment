@@ -1,0 +1,445 @@
+:root {
+  /* Color Palette - Refined Medical Aesthetic */
+  --color-primary: #1a3a52;
+  --color-primary-light: #2d5571;
+  --color-accent: #e8505b;
+  --color-accent-soft: #f4727c;
+
+  --color-bg-main: #fafbfc;
+  --color-bg-card: #ffffff;
+  --color-bg-metric: #f8f9fb;
+
+  --color-text-primary: #1a2332;
+  --color-text-secondary: #5a6c7d;
+  --color-text-tertiary: #8b97a5;
+
+  /* Status Colors */
+  --status-excellent: #10b981;
+  --status-good: #f59e0b;
+  --status-attention: #ef4444;
+
+  /* Typography */
+  --font-display: "Playfair Display", "Georgia", serif;
+  --font-body:
+    "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Spacing Scale */
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(26, 35, 50, 0.06);
+  --shadow-md: 0 4px 12px rgba(26, 35, 50, 0.08);
+  --shadow-lg: 0 12px 32px rgba(26, 35, 50, 0.12);
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Google Fonts Import */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap");
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg-main);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* App Layout */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-primary-light) 100%
+  );
+  color: white;
+  padding: var(--space-2xl) var(--space-lg);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  animation: slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.app-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+  letter-spacing: -0.02em;
+}
+
+.app-subtitle {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  opacity: 0.9;
+  font-weight: 400;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.app-main {
+  flex: 1;
+  padding: var(--space-2xl) var(--space-lg);
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-xl);
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+/* Practice Summary Card */
+.practice-card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+  border: 1px solid rgba(26, 35, 50, 0.06);
+  position: relative;
+  overflow: hidden;
+  animation: cardEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.practice-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent) 0%,
+    var(--color-accent-soft) 100%
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-slow);
+}
+
+.practice-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.practice-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Staggered animation delays for cards */
+.practice-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.practice-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.practice-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* Card Header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid rgba(26, 35, 50, 0.08);
+}
+
+.header-content {
+  flex: 1;
+}
+
+.practice-name {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: var(--space-xs);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.practice-location {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.practice-location::before {
+  content: "📍";
+  margin-right: var(--space-xs);
+  font-size: 0.9rem;
+}
+
+.status-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: var(--space-xs);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Metrics Grid */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.metric-card {
+  background: var(--color-bg-metric);
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  border: 1px solid transparent;
+}
+
+.metric-card:hover {
+  background: white;
+  border-color: var(--color-accent);
+  transform: scale(1.02);
+}
+
+.metric-highlight {
+  grid-column: span 2;
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe8ea 100%);
+  border: 1px solid rgba(232, 80, 91, 0.15);
+}
+
+.metric-highlight:hover {
+  background: linear-gradient(135deg, #fff5f5 0%, #ffd5d8 100%);
+  border-color: var(--color-accent);
+}
+
+.metric-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: var(--space-xs);
+  font-family: var(--font-body);
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: baseline;
+}
+
+.rating-star {
+  color: #fbbf24;
+  margin-left: var(--space-xs);
+  font-size: 1.5rem;
+  animation: sparkle 1.5s ease-in-out infinite;
+}
+
+.metric-label {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Specialties Section */
+.specialties-section {
+  padding-top: var(--space-lg);
+  border-top: 1px solid rgba(26, 35, 50, 0.08);
+}
+
+.specialties-label {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+.specialties-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.specialty-tag {
+  background: var(--color-primary);
+  color: white;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: 24px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  cursor: default;
+}
+
+.specialty-tag:hover {
+  background: var(--color-primary-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Footer */
+.app-footer {
+  background: var(--color-primary);
+  color: white;
+  padding: var(--space-lg);
+  text-align: center;
+  font-size: 0.875rem;
+  opacity: 0.9;
+  margin-top: auto;
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app-header {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .app-main {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .cards-container {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .practice-card {
+    padding: var(--space-lg);
+  }
+
+  .practice-name {
+    font-size: 1.5rem;
+  }
+
+  .metric-value {
+    font-size: 1.75rem;
+  }
+
+  .metrics-grid {
+    gap: var(--space-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-highlight {
+    grid-column: span 1;
+  }
+
+  .card-header {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .status-indicator {
+    align-self: flex-start;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .app-header,
+  .app-footer {
+    display: none;
+  }
+
+  .practice-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+
+  .practice-card:hover {
+    transform: none;
+  }
+}
